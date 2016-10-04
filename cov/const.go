@@ -43,30 +43,29 @@ const (
                 margin-left: 10px;
                 border-collapse: collapse;
             }
-            td { 
-                background-color: #fff; 
+            td {
+                background-color: #fff;
                 padding: 2px;
             }
-            table.overview td {
-                padding-right: 20px;
-            }
             td.percent, td.linecount { text-align: right; }
-            div.package, #totalcov { 
+            div.package, #totalcov {
                 color: #fff;
-                background-color: #375eab; 
                 font-size: 16px;
                 font-weight: bold;
                 padding: 10px;
                 border-radius: 5px 5px 5px 5px;
             }
-            div.package, #totalcov { 
-                float: right; 
+            div.package {
+                background-color: #375eab;
+            }
+
+            div.package, #totalcov {
+                float: right;
                 right: 10px;
             }
-            #totalcov { 
+            #totalcov {
                 top: 10px;
                 position: relative;
-                background-color: #fff;
                 color: #000;
                 border: 1px solid #375eab;
                 clear: both;
@@ -82,8 +81,8 @@ const (
                 float: right;
                 color: #000;
             }
-            #doctitle { 
-                background-color: #fff; 
+            #doctitle {
+                background-color: #fff;
                 font-size: 24px;
                 margin-top: 20px;
                 margin-left: 10px;
@@ -97,11 +96,11 @@ const (
             table tr:last-child td {
                 font-weight: bold;
             }
-            .functitle, .funcname { 
-                text-align: center; 
-                font-size: 20px; 
-                font-weight: bold; 
-                color: 375eab; 
+            .functitle, .funcname {
+                text-align: center;
+                font-size: 20px;
+                font-weight: bold;
+                color: 375eab;
             }
             .funcname {
                 text-align: left;
@@ -117,7 +116,7 @@ const (
             table.listing td {
                 padding: 0px;
                 font-size: 12px;
-                background-color: #eee; 
+                background-color: #eee;
                 vertical-align: top;
                 padding-left: 10px;
                 border-bottom: 1px solid #fff;
@@ -143,7 +142,7 @@ const (
             .info code {
             }
             pre { margin: 1px; }
-            pre.cmd { 
+            pre.cmd {
                 background-color: #e9e9e9;
                 border-radius: 5px 5px 5px 5px;
                 padding: 10px;
@@ -151,15 +150,33 @@ const (
                 line-height: 18px;
                 font-size; 14px;
             }
-            a { 
-                text-decoration: none; 
+            a {
+                text-decoration: none;
                 color: #375eab;
             }
             a:hover { text-decoration: underline; }
+
             p { margin-left: 10px; }
+
+            .progress-bar-danger, .progress-bar-warning, .progress-bar-success{
+            padding: 10px;
+            }
+            .progress-bar{
+                width: 200px;
+        	padding: 10px 10px;
+            }
+            .progress-bar-danger {
+                background-color: #d9534f;
+            }
+            .progress-bar-warning {
+                background-color: #f0ad4e;
+            }
+            .progress-bar-success {
+                background-color: #5cb85c;
+            }
         </style>
         `
 
-	overview = `<p>This is a coverage report created after analysis of the <code>%s</code> package. It 
+	overview = `<p>This is a coverage report created after analysis of the <code>%s</code> package. It
         has been generated with the following command:</p><pre class="cmd">gocov test %s | gocov-html</pre>        <p>Here are the stats. Please select a function name to view its implementation and see what's left for testing.</p>`
 )

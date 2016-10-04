@@ -7,7 +7,7 @@ This is a simple helper tool for generating HTML output from `axw/gocov`_.
 
 Here is a screenshot:
 
-.. image:: https://github.com/matm/gocov-html/blob/master/gocovh-html.png
+.. image:: https://github.com/duynguyenhoang/gocov-html/blob/master/gocovh-html.png
    :scale: 40 %
    :alt: HTML coverage report screenshot
    :align: center
@@ -19,7 +19,7 @@ Installation
 Just type the following to install the program and its dependencies::
 
     $ go get github.com/axw/gocov/gocov
-    $ go get -u gopkg.in/matm/v1/gocov-html
+    $ go get -u github.com/duynguyenhoang/gocov-html
 
 Usage
 -----

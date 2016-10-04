@@ -186,8 +186,8 @@ func printReport(w io.Writer, r *report) {
 
 func printReportSummary(w io.Writer, rp reportPackage) {
 	fmt.Fprintf(w, "<div id=\"summaryWrapper\">")
-	fmt.Fprintf(w, "<div class=\"package\">%s</div>\n", rp.pkg.Name)
-	fmt.Fprintf(w, "<div id=\"totalcov\">%.2f%%</div>\n", rp.percentageReached())
+	fmt.Fprintf(w, "<div class=\"package\"><a href=\"#doctitle\">%s</a></div>\n", rp.pkg.Name)
+	fmt.Fprintf(w, "<div id=\"totalcov\" class=\"progress-bar-%s\">%.2f%%</div>\n", calculateClass(rp.percentageReached()), rp.percentageReached())
 	fmt.Fprintf(w, "</div>")
 }
 
@@ -200,18 +200,29 @@ func printReportOverview(w io.Writer, reportPackages reportPackageList) reportPa
 	for _, rp := range reportPackages {
 		rv.reachedStatements += rp.reachedStatements
 		rv.totalStatements += rp.totalStatements
-		fmt.Fprintf(w, "<tr id=\"s_pkg_%s\"><td><code><a href=\"#pkg_%s\">%s</a></code></td><td class=\"percent\"><code>%.2f%%</code></td><td class=\"linecount\"><code>%d/%d</code></td></tr>\n",
-			rp.pkg.Name, rp.pkg.Name, rp.pkg.Name, rp.percentageReached(), rp.reachedStatements, rp.totalStatements)
+		fmt.Fprintf(w, "<tr id=\"s_pkg_%s\"><td><code><a href=\"#pkg_%s\">%s</a></code></td>"+
+			"<td class=\"percent\"><code>%.2f%%</code></td>"+
+			"<td class=\"progress-bar\"><div class=\"progress-bar-%s\" style=\"width: %.2f%%\"></div></td>"+
+			"<td class=\"linecount\"><code>%d/%d</code></td></tr>\n",
+			rp.pkg.Name, rp.pkg.Name, rp.pkg.Name, rp.percentageReached(), calculateClass(rp.percentageReached()), rp.percentageReached(), rp.reachedStatements, rp.totalStatements)
 	}
 
-	fmt.Fprintf(w, "<tr><td><code>%s</code></td><td class=\"percent\"><code>%.2f%%</code></td><td class=\"linecount\"><code>%d/%d</code></td></tr>\n",
-		"Report Total", rv.percentageReached(),
-		rv.reachedStatements, rv.totalStatements)
+	fmt.Fprintf(w, "<tr><td><code>%s</code></td><td class=\"percent\"><code>%.2f%%</code></td><td class=\"progress-bar\"><div class=\"progress-bar-%s\" style=\"width: %.2f%%\"></div></td><td class=\"linecount\"><code>%d/%d</code></td></tr>\n",
+		"Report Total", rv.percentageReached(), calculateClass(rv.percentageReached()), rv.percentageReached(), rv.reachedStatements, rv.totalStatements)
 	fmt.Fprintf(w, "</table>\n")
 
 	return rv
 }
 
+func calculateClass(percent float64) string {
+	if percent < 30 {
+		return `danger`
+	} else if percent < 70 {
+		return `warning`
+	} else {
+		return `success`
+	}
+}
 func printPackage(w io.Writer, r *report, rp reportPackage) {
 	fmt.Fprintf(w, "<div id=\"pkg_%s\" class=\"funcname\">Package Overview: %s <span class=\"packageTotal\">%.2f%%</span></div>", rp.pkg.Name, rp.pkg.Name, rp.percentageReached())
 	fmt.Fprintf(w, overview, rp.pkg.Name, rp.pkg.Name)
