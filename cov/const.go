@@ -21,7 +21,8 @@
 package cov
 
 const (
-	ProjectUrl = "https://github.com/matm/gocov-html"
+	BasedProjectUrl = "https://github.com/matm/gocov-html"
+	ProjectUrl = "https://github.com/duynguyenhoang/gocov-html"
 	htmlHeader = `<html>
     <head>
         <title>Coverage Report</title>
@@ -57,6 +58,10 @@ const (
             }
             div.package {
                 background-color: #375eab;
+            }
+
+            div.package a {
+                color: #fff;
             }
 
             div.package, #totalcov {

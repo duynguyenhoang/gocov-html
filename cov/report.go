@@ -167,8 +167,8 @@ func printReport(w io.Writer, r *report) {
 
 	}
 	summaryPackage := reportPackages[0]
-	fmt.Fprintf(w, "<div id=\"about\">Generated on %s with <a href=\"%s\">gocov-html</a></div>",
-		time.Now().Format(time.RFC822Z), ProjectUrl)
+	fmt.Fprintf(w, "<div id=\"about\">Generated on %s with <a href=\"%s\">gocov-html</a>; based on <a href=\"%s\">gocov-html</a></div>",
+		time.Now().Format(time.RFC822Z), ProjectUrl, BasedProjectUrl)
 	if len(reportPackages) > 1 {
 		summaryPackage = printReportOverview(w, reportPackages)
 	}
